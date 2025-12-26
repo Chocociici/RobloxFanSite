@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | Проект "ОМЕГА"</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .profile-header {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--accent-color);
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .default-bg-full {
+            background: linear-gradient(135deg, #0a0a12 0%, #1a1a2e 100%);
+        }
+
+        .cyber-bg-full {
+            background: linear-gradient(135deg, #0a0a12 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .ocean-bg-full {
+            background: linear-gradient(135deg, #0a0a12 0%, #1a1a2e 50%, #2d545e 100%);
+        }
+
+        .profile-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            margin: 0 auto 20px;
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            color: var(--accent-color);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .profile-level {
+            background: var(--accent-color);
+            color: var(--main-bg-color);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .profile-bio {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--accent-color);
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(0, 179, 179, 0.1);
+            box-shadow: 0 0 15px var(--glow-color);
+        }
+
+        .stat-number {
+            color: var(--accent-color);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #8888aa;
+            font-size: 0.9rem;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn-large {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+            padding: 12px 25px;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .action-btn-large:hover {
+            background: rgba(0, 179, 179, 0.2);
+            color: var(--accent-color);
+            box-shadow: 0 0 15px var(--glow-color);
+        }
+
+        .user-feed {
+            margin-top: 40px;
+        }
+
+        .feed-header {
+            color: var(--accent-color);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        .user-post {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--accent-color);
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .user-post:hover {
+            background: rgba(0, 179, 179, 0.1);
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .post-content {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #8888aa;
+            font-size: 0.9rem;
+        }
+
+        .no-posts {
+            text-align: center;
+            color: #8888aa;
+            font-style: italic;
+            padding: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-btn-large {
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="glitch" data-text="ЛИЧНЫЙ КАБИНЕТ">ЛИЧНЫЙ КАБИНЕТ</h1>
+                <div class="header-links">
+                    <a href="front.html" class="neon-link">Вернуться в архив</a>
+                    <a href="front2.html" class="neon-link">Архив персонала</a>
+                    <a href="news.html" class="neon-link">Лента новостей</a>
+                </div>
+                <p>Управление профилем и публикациями | Проект "ОМЕГА"</p>
+            </div>
+        </header>
+
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-bg default-bg-full" id="profileBackground"></div>
+                <div class="profile-content">
+                    <div class="profile-avatar">
+                        <img id="profileAvatar" src="" alt="Аватар">
+                    </div>
+                    <h1 class="profile-name" id="profileName">Загрузка...</h1>
+                    <div class="profile-level" id="profileLevel">УРОВЕНЬ</div>
+                    <div class="profile-bio" id="profileBio">Загрузка информации...</div>
+                </div>
+            </div>
+
+            <div class="profile-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="postsCount">0</div>
+                    <div class="stat-label">ПУБЛИКАЦИЙ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="commentsCount">0</div>
+                    <div class="stat-label">КОММЕНТАРИЕВ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="memberDays">0</div>
+                    <div class="stat-label">ДНЕЙ С НАМИ</div>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <button class="action-btn-large" id="editProfileBtn">РЕДАКТИРОВАТЬ ПРОФИЛЬ</button>
+                <button class="action-btn-large" id="myPostsBtn">МОИ ПУБЛИКАЦИИ</button>
+                <a href="news.html" class="action-btn-large">ЛЕНТА НОВОСТЕЙ</a>
+                <button class="action-btn-large" id="newPostBtn">НОВАЯ ПУБЛИКАЦИЯ</button>
+            </div>
+
+            <div class="user-feed">
+                <h2 class="feed-header">МОИ ПОСЛЕДНИЕ ПУБЛИКАЦИИ</h2>
+                <div id="userPostsContainer">
+                    <!-- Посты будут загружены здесь -->
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>ПРОЕКТ "ОМЕГА" | СИСТЕМА УПРАВЛЕНИЯ ПОЛЬЗОВАТЕЛЯМИ</p>
+            <p>Версия системы: 3.1.0-PROFILE</p>
+        </footer>
+    </div>
+
+    <div class="visitor-counter">Посетителей сегодня: <span id="visit-count">0</span></div>
+
+    <script src="scripts.js"></script>
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Profile page loaded');
+        
+        // Инициализация счетчика посещений
+        let visitCount = localStorage.getItem('os5_visit_count') || 0;
+        document.getElementById('visit-count').textContent = visitCount;
+
+        // Ждем инициализации authSystem
+        const initProfile = setInterval(() => {
+            if (window.authSystem) {
+                clearInterval(initProfile);
+                loadProfile();
+            }
+        }, 100);
+    });
+
+    function loadProfile() {
+        // Проверка авторизации
+        if (!window.authSystem || !window.authSystem.isAuthenticated()) {
+            alert('Для доступа к личному кабинету необходимо войти в систему');
+            window.location.href = 'front.html';
+            return;
+        }
+
+        const user = window.authSystem.getCurrentUser();
+        if (!user) {
+            alert('Ошибка загрузки данных пользователя');
+            window.location.href = 'front.html';
+            return;
+        }
+
+        console.log('Loading profile for user:', user.username);
+        console.log('User data:', user);
+        loadProfileData(user);
+        loadUserStats(user.username);
+        loadUserPosts(user.username);
+        setupEventListeners();
+    }
+
+    function loadProfileData(user) {
+        // Устанавливаем аватар с проверкой кастомного аватара
+        const avatarUrl = getAvatarUrl(user.avatar, user.username);
+        console.log('Setting avatar URL:', avatarUrl);
+        document.getElementById('profileAvatar').src = avatarUrl;
+        
+        // Устанавливаем данные с проверками
+        document.getElementById('profileName').textContent = user.username || 'Неизвестный пользователь';
+        document.getElementById('profileLevel').textContent = (user.level || 'user').toUpperCase();
+        document.getElementById('profileBio').textContent = user.bio || 'Пользователь еще не добавил информацию о себе';
+        
+        // Устанавливаем фон
+        const bgElement = document.getElementById('profileBackground');
+        bgElement.className = 'profile-bg ' + (user.profileBackground || 'default') + '-bg-full';
+    }
+
+    function getAvatarUrl(avatarType, username) {
+        // Сначала проверяем кастомный аватар
+        if (avatarType === 'custom') {
+            const avatarKey = `os5_avatar_${username}`;
+            const avatarData = JSON.parse(localStorage.getItem(avatarKey));
+            if (avatarData && avatarData.data) {
+                return avatarData.data;
+            }
+        }
+        
+        // Если кастомного нет или тип другой, используем DiceBear
+        const providers = {
+            'default': 'avataaars',
+            'robot': 'bottts', 
+            'pixel': 'pixel-art',
+            'custom': 'avataaars'
+        };
+        const provider = providers[avatarType] || 'avataaars';
+        return `https://api.dicebear.com/7.x/${provider}/svg?seed=${encodeURIComponent(username)}`;
+    }
+
+    function loadUserStats(username) {
+        const user = window.authSystem.getCurrentUser();
+        if (!user) return;
+
+        // Подсчет постов
+        const userPosts = window.authSystem.posts.filter(post => post.author === user.username);
+        document.getElementById('postsCount').textContent = userPosts.length;
+
+        // Подсчет комментариев
+        const userComments = window.authSystem.comments.filter(comment => comment.user === user.username);
+        document.getElementById('commentsCount').textContent = userComments.length;
+
+        // Дни в системе
+        const userData = window.authSystem.users[user.username];
+        if (userData && userData.registrationDate) {
+            const regDate = new Date(userData.registrationDate);
+            const today = new Date();
+            const days = Math.floor((today - regDate) / (1000 * 60 * 60 * 24));
+            document.getElementById('memberDays').textContent = Math.max(1, days);
+        } else {
+            document.getElementById('memberDays').textContent = '1';
+        }
+    }
+
+    function loadUserPosts(username) {
+        const user = window.authSystem.getCurrentUser();
+        if (!user) return;
+
+        const userPosts = window.authSystem.posts.filter(post => post.author === user.username);
+        const container = document.getElementById('userPostsContainer');
+
+        if (userPosts.length === 0) {
+            container.innerHTML = '<p class="no-posts">У вас пока нет публикаций</p>';
+            return;
+        }
+
+        // Показываем последние 5 постов
+        const recentPosts = userPosts.slice(0, 5);
+        container.innerHTML = recentPosts.map(post => `
+            <div class="user-post">
+                <div class="post-content">${post.content}</div>
+                <div class="post-meta">
+                    <span>${new Date(post.date).toLocaleString()}</span>
+                    <span>❤️ ${post.likes || 0} лайков</span>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function setupEventListeners() {
+        // Редактирование профиля
+        document.getElementById('editProfileBtn').addEventListener('click', function() {
+            console.log('Edit profile clicked');
+            if (window.authSystem && window.authSystem.showProfileModal) {
+                window.authSystem.showProfileModal();
+            } else {
+                alert('Система редактирования профиля временно недоступна');
+            }
+        });
+
+        // Мои публикации
+        document.getElementById('myPostsBtn').addEventListener('click', function() {
+            console.log('My posts clicked');
+            if (window.authSystem && window.authSystem.showMyPostsModal) {
+                window.authSystem.showMyPostsModal();
+            } else {
+                alert('Система управления постами временно недоступна');
+            }
+        });
+
+        // Новая публикация
+        document.getElementById('newPostBtn').addEventListener('click', function() {
+            console.log('New post clicked');
+            if (window.authSystem && window.authSystem.showMyPostsModal) {
+                window.authSystem.showMyPostsModal();
+            } else {
+                alert('Система создания постов временно недоступна');
+            }
+        });
+    }
+
+    // Глобальная функция для обновления профиля
+    window.updateProfileDisplay = function() {
+        console.log('Updating profile display...');
+        if (window.authSystem && window.authSystem.isAuthenticated()) {
+            // Перезагружаем данные пользователя
+            const user = window.authSystem.getCurrentUser();
+            console.log('Updated user data:', user);
+            loadProfileData(user);
+            loadUserStats(user.username);
+            loadUserPosts(user.username);
+        }
+    };
+</script>
+</body>
+</html>
