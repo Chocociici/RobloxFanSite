@@ -1,0 +1,1895 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron&display=swap');
+
+
+
+  a.neon-link {
+
+            color: #00b3b3;
+
+            text-decoration: none;
+
+            text-shadow: 0 0 5px #00b3b3;
+
+            transition: all 0.3s ease;
+
+        }
+
+        
+
+   a.neon-link:hover {
+
+            color: #00ffff;
+
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+
+        }
+
+:root {
+
+    --main-bg-color: #0a0a12;
+
+    --text-color: #c2c2d6;
+
+    --accent-color: #00b3b3;
+
+    --glow-color: rgba(0, 179, 179, 0.5);
+
+    --classified-color: #ff3333;
+
+}
+
+
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+
+body {
+
+    background-color: var(--main-bg-color);
+
+    color: var(--text-color);
+
+    font-family: 'Share Tech Mono', monospace;
+
+    line-height: 1.6;
+
+    padding: 20px;
+
+    background-image: 
+
+        radial-gradient(circle at 10% 20%, rgba(0, 179, 179, 0.05) 0%, transparent 20%),
+
+        radial-gradient(circle at 90% 80%, rgba(0, 179, 179, 0.05) 0%, transparent 20%),
+
+        linear-gradient(rgba(10, 10, 18, 0.99), rgba(10, 10, 18, 0.99)),
+
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2300b3b3' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+
+    overflow-x: hidden;
+
+}
+
+
+
+.container {
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 20px;
+
+    border: 1px solid var(--accent-color);
+
+    box-shadow: 0 0 15px var(--glow-color);
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+
+.container::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    height: 1px;
+
+    background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+
+    animation: scanline 8s linear infinite;
+
+}
+
+
+
+@keyframes scanline {
+
+    0% { top: 0; }
+
+    100% { top: 100%; }
+
+}
+
+
+
+@keyframes flicker {
+
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+
+        opacity: 1;
+
+    }
+
+    20%, 24%, 55% {
+
+        opacity: 0.6;
+
+    }
+
+}
+
+
+
+header {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid var(--accent-color);
+
+    position: relative;
+
+    animation: flicker 10s infinite;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
+
+
+
+.header-content {
+
+    width: 100%;
+
+    max-width: 800px;
+
+}
+
+
+
+h1 {
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 2.5rem;
+
+    color: var(--accent-color);
+
+    text-transform: uppercase;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 10px;
+
+    text-shadow: 0 0 10px var(--glow-color);
+
+}
+
+
+
+h2 {
+
+    font-family: 'Orbitron', sans-serif;
+
+    color: var(--accent-color);
+
+    margin: 25px 0 15px;
+
+    border-left: 3px solid var(--accent-color);
+
+    padding-left: 10px;
+
+    text-shadow: 0 0 5px var(--glow-color);
+
+}
+
+
+
+p {
+
+    margin-bottom: 15px;
+
+    text-align: justify;
+
+}
+
+
+
+.timestamp {
+
+    font-size: 0.9rem;
+
+    color: #8888aa;
+
+    text-align: right;
+
+    margin-top: -15px;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+.classified {
+
+    background-color: rgba(255, 51, 51, 0.1);
+
+    border: 1px solid var(--classified-color);
+
+    padding: 15px;
+
+    margin: 20px 0;
+
+    position: relative;
+
+}
+
+
+
+.classified::before {
+
+    content: "ЗАСЕКРЕЧЕНО";
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%) rotate(-45deg);
+
+    font-size: 2.5rem;
+
+    font-weight: bold;
+
+    color: rgba(255, 51, 51, 0.2);
+
+    letter-spacing: 2px;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+}
+
+
+
+.classified::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 20px;
+
+    width: 80px;
+
+    height: 80px;
+
+    background-image: url('logo.png');
+
+    background-size: contain;
+
+    background-repeat: no-repeat;
+
+    opacity: 0.7;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+}
+
+
+
+.classified.revealed::before,
+
+.classified.revealed::after {
+
+    display: none;
+
+}
+
+
+
+.classified-text {
+
+    opacity: 0.2;
+
+    filter: blur(5px);
+
+    user-select: none;
+
+    transition: all 0.5s ease;
+
+}
+
+
+
+.classified.revealed .classified-text {
+
+    opacity: 1;
+
+    filter: blur(0);
+
+    user-select: text;
+
+}
+
+
+
+.password-prompt {
+
+    margin: 15px 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+}
+
+
+
+.password-label {
+
+    color: var(--accent-color);
+
+    font-weight: bold;
+
+    min-width: 120px;
+
+}
+
+
+
+.password-input {
+
+    display: flex;
+
+    gap: 5px;
+
+    flex-wrap: wrap;
+
+}
+
+
+
+.password-char {
+
+    width: 30px;
+
+    height: 35px;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    font-family: 'Share Tech Mono', monospace;
+
+    background: rgba(0, 0, 0, 0.3);
+
+    border: 1px solid var(--accent-color);
+
+    color: var(--text-color);
+
+    text-transform: uppercase;
+
+}
+
+
+
+.password-char.highlight {
+
+    font-weight: bold;
+
+    background: rgba(0, 179, 179, 0.1);
+
+    border: 1px solid #00ffff;
+
+}
+
+
+
+.password-hint {
+
+    font-size: 0.8rem;
+
+    color: #8888aa;
+
+    margin-top: 5px;
+
+    width: 100%;
+
+}
+
+
+
+.subject {
+
+    margin: 30px 0;
+
+    padding: 15px;
+
+    border-left: 2px solid var(--accent-color);
+
+    transition: all 0.3s ease;
+
+}
+
+
+
+.subject:hover {
+
+    background-color: rgba(0, 179, 179, 0.05);
+
+}
+
+
+
+.subject h3 {
+
+    color: var(--accent-color);
+
+    margin-bottom: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+
+.subject h3::before {
+
+    content: "▶";
+
+    margin-right: 10px;
+
+    font-size: 0.8rem;
+
+    transition: transform 0.3s ease;
+
+}
+
+
+
+.subject:hover h3::before {
+
+    transform: rotate(90deg);
+
+}
+
+
+
+.abilities-list {
+
+    list-style-type: none;
+
+    margin: 15px 0;
+
+}
+
+
+
+.abilities-list li {
+
+    margin-bottom: 8px;
+
+    padding-left: 20px;
+
+    position: relative;
+
+}
+
+
+
+.abilities-list li::before {
+
+    content: "■";
+
+    position: absolute;
+
+    left: 0;
+
+    color: var(--accent-color);
+
+    font-size: 0.8rem;
+
+}
+
+
+
+.image-hover {
+
+    display: inline-block;
+
+    position: relative;
+
+    cursor: pointer;
+
+    color: var(--accent-color);
+
+    text-decoration: underline dotted;
+
+}
+
+
+
+.image-hover .hover-image {
+
+    position: absolute;
+
+    bottom: 100%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 150px;
+
+    height: auto;
+
+    border: 1px solid var(--accent-color);
+
+    box-shadow: 0 0 10px rgba(0, 179, 179, 0.5);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: all 0.3s ease;
+
+    z-index: 100;
+
+}
+
+
+
+.image-hover:hover .hover-image {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    bottom: calc(100% + 10px);
+
+}
+
+
+
+.visitor-counter {
+
+    position: fixed;
+
+    bottom: 10px;
+
+    right: 10px;
+
+    background: rgba(0, 0, 0, 0.7);
+
+    padding: 5px 10px;
+
+    border: 1px solid var(--accent-color);
+
+    font-size: 0.8rem;
+
+    z-index: 1000;
+
+}
+
+
+
+.comments-section {
+
+    margin-top: 40px;
+
+    border-top: 1px solid var(--accent-color);
+
+    padding-top: 20px;
+
+}
+
+
+
+.comment-form {
+
+    margin-bottom: 30px;
+
+}
+
+
+
+.comment-form textarea {
+
+    width: 100%;
+
+    background: rgba(0, 0, 0, 0.3);
+
+    border: 1px solid var(--accent-color);
+
+    color: var(--text-color);
+
+    padding: 10px;
+
+    margin-bottom: 10px;
+
+    font-family: 'Share Tech Mono', monospace;
+
+    resize: vertical;
+
+    min-height: 80px;
+
+}
+
+
+
+.comment-form button {
+
+    background: var(--accent-color);
+
+    color: var(--main-bg-color);
+
+    border: none;
+
+    padding: 8px 15px;
+
+    cursor: pointer;
+
+    font-family: 'Orbitron', sans-serif;
+
+}
+
+
+
+.comment {
+
+    border-left: 2px solid var(--accent-color);
+
+    padding: 10px 15px;
+
+    margin-bottom: 15px;
+
+    background: rgba(0, 0, 0, 0.2);
+
+}
+
+
+
+.comment-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 5px;
+
+    font-size: 0.9rem;
+
+    color: #8888aa;
+
+}
+
+
+
+.admin-badge {
+
+    background: var(--classified-color);
+
+    color: white;
+
+    padding: 2px 5px;
+
+    font-size: 0.7rem;
+
+    border-radius: 3px;
+
+}
+
+
+
+footer {
+
+    text-align: center;
+
+    margin-top: 40px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid var(--accent-color);
+
+    font-size: 0.9rem;
+
+    color: #8888aa;
+
+}
+
+
+
+@media (max-width: 768px) {
+
+    h1 {
+
+        font-size: 1.8rem;
+
+    }
+
+    
+
+    .container {
+
+        padding: 15px;
+
+    }
+
+    
+
+    .image-hover .hover-image {
+
+        width: 120px;
+
+    }
+
+    
+
+    .password-input {
+
+        flex-wrap: wrap;
+
+    }
+
+    
+
+    .password-label {
+
+        min-width: 100px;
+
+    }
+
+    
+
+    .classified::after {
+
+        width: 60px;
+
+        height: 60px;
+
+    }
+
+}
+
+
+
+@media (max-width: 480px) {
+
+    h1 {
+
+        font-size: 1.5rem;
+
+    }
+
+    
+
+    h2 {
+
+        font-size: 1.2rem;
+
+    }
+
+    
+
+    .image-hover .hover-image {
+
+        width: 100px;
+
+    }
+
+    
+
+    .password-char {
+
+        width: 25px;
+
+        height: 30px;
+
+        font-size: 16px;
+
+    }
+
+    
+
+    .password-label {
+
+        min-width: 80px;
+
+        font-size: 0.9rem;
+
+    }
+
+    
+
+    .classified::after {
+
+        width: 40px;
+
+        height: 40px;
+
+        top: 10px;
+
+        right: 10px;
+
+    }
+
+}
+
+
+
+.glitch {
+
+    position: relative;
+
+}
+
+
+
+.glitch::before, .glitch::after {
+
+    content: attr(data-text);
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    clip: rect(0, 0, 0, 0);
+
+}
+
+
+
+.glitch::before {
+
+    left: 2px;
+
+    text-shadow: -2px 0 #ff00ff;
+
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+
+}
+
+
+
+.glitch::after {
+
+    left: -2px;
+
+    text-shadow: 2px 0 #00ffff;
+
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+
+}
+
+
+
+@keyframes glitch-anim-1 {
+
+    0% { clip: rect(42px, 9999px, 44px, 0); }
+
+    5% { clip: rect(12px, 9999px, 59px, 0); }
+
+    10% { clip: rect(48px, 9999px, 29px, 0); }
+
+    15% { clip: rect(42px, 9999px, 73px, 0); }
+
+    20% { clip: rect(63px, 9999px, 27px, 0); }
+
+    25% { clip: rect(34px, 9999px, 55px, 0); }
+
+    30% { clip: rect(86px, 9999px, 73px, 0); }
+
+    35% { clip: rect(20px, 9999px, 20px, 0); }
+
+    40% { clip: rect(26px, 9999px, 60px, 0); }
+
+    45% { clip: rect(25px, 9999px, 66px, 0); }
+
+    50% { clip: rect(57px, 9999px, 98px, 0); }
+
+    55% { clip: rect(5px, 9999px, 46px, 0); }
+
+    60% { clip: rect(82px, 9999px, 31px, 0); }
+
+    65% { clip: rect(54px, 9999px, 27px, 0); }
+
+    70% { clip: rect(28px, 9999px, 99px, 0); }
+
+    75% { clip: rect(45px, 9999px, 69px, 0); }
+
+    80% { clip: rect(23px, 9999px, 85px, 0); }
+
+    85% { clip: rect(54px, 9999px, 84px, 0); }
+
+    90% { clip: rect(45px, 9999px, 47px, 0); }
+
+    95% { clip: rect(24px, 9999px, 23px, 0); }
+
+    100% { clip: rect(32px, 9999px, 92px, 0); }
+
+}
+
+
+
+@keyframes glitch-anim-2 {
+
+    0% { clip: rect(65px, 9999px, 100px, 0); }
+
+    5% { clip: rect(52px, 9999px, 74px, 0); }
+
+    10% { clip: rect(79px, 9999px, 85px, 0); }
+
+    15% { clip: rect(75px, 9999px, 5px, 0); }
+
+    20% { clip: rect(67px, 9999px, 61px, 0); }
+
+    25% { clip: rect(14px, 9999px, 79px, 0); }
+
+    30% { clip: rect(1px, 9999px, 66px, 0); }
+
+    35% { clip: rect(86px, 9999px, 30px, 0); }
+
+    40% { clip: rect(23px, 9999px, 98px, 0); }
+
+    45% { clip: rect(85px, 9999px, 72px, 0); }
+
+    50% { clip: rect(71px, 9999px, 75px, 0); }
+
+    55% { clip: rect(2px, 9999px, 48px, 0); }
+
+    60% { clip: rect(30px, 9999px, 16px, 0); }
+
+    65% { clip: rect(59px, 9999px, 50px, 0); }
+
+    70% { clip: rect(41px, 9999px, 62px, 0); }
+
+    75% { clip: rect(2px, 9999px, 82px, 0); }
+
+    80% { clip: rect(47px, 9999px, 73px, 0); }
+
+    85% { clip: rect(3px, 9999px, 27px, 0); }
+
+    90% { clip: rect(26px, 9999px, 55px, 0); }
+
+    95% { clip: rect(42px, 9999px, 97px, 0); }
+
+    100% { clip: rect(38px, 9999px, 49px, 0); }
+
+}
+
+
+
+.pulse {
+
+    animation: pulse 2s infinite;
+
+}
+
+
+
+@keyframes pulse {
+
+    0% { opacity: 0.7; }
+
+    50% { opacity: 0.3; }
+
+    100% { opacity: 0.7; }
+
+}
+
+.password-full {
+
+    width: 100%;
+
+    max-width: 300px;
+
+    height: 35px;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    font-family: 'Share Tech Mono', monospace;
+
+    background: rgba(0, 0, 0, 0.3);
+
+    border: 1px solid var(--accent-color);
+
+    color: var(--text-color);
+
+    text-transform: uppercase;
+
+    padding: 5px 10px;
+
+}
+
+
+
+.password-full:focus {
+
+    outline: none;
+
+    border-color: #00ffff;
+
+    box-shadow: 0 0 5px var(--glow-color);
+
+}
+
+
+
+.delete-comment {
+
+    background: var(--classified-color);
+
+    color: white;
+
+    border: none;
+
+    padding: 2px 6px;
+
+    cursor: pointer;
+
+    font-size: 0.7rem;
+
+    border-radius: 3px;
+
+    margin-left: 10px;
+
+}
+
+
+
+.admin-tools {
+
+    margin-top: 10px;
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+}
+
+/* Стили для системы регистрации и авторизации */
+.auth-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.auth-modal.show {
+    display: flex;
+}
+
+.auth-content {
+    background: var(--main-bg-color);
+    border: 2px solid var(--accent-color);
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 0 30px var(--glow-color);
+    position: relative;
+    animation: modalAppear 0.5s ease;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.auth-header h3 {
+    color: var(--accent-color);
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px var(--glow-color);
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.auth-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    padding: 12px;
+    font-family: 'Share Tech Mono', monospace;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.auth-tab.active {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+    text-shadow: 0 0 5px var(--glow-color);
+}
+
+.auth-tab:hover:not(.active) {
+    background: rgba(0, 179, 179, 0.1);
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    color: var(--accent-color);
+    margin-bottom: 8px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 12px;
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #00ffff;
+    box-shadow: 0 0 10px var(--glow-color);
+}
+
+.password-strength {
+    height: 4px;
+    background: rgba(0, 179, 179, 0.2);
+    margin-top: 5px;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.strength-weak { background: #ff3333; width: 33%; }
+.strength-medium { background: #ffaa00; width: 66%; }
+.strength-strong { background: #00ff00; width: 100%; }
+
+.auth-btn {
+    width: 100%;
+    background: var(--accent-color);
+    color: var(--main-bg-color);
+    border: none;
+    padding: 12px;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.auth-btn:hover {
+    background: #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+.auth-btn:disabled {
+    background: #8888aa;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--accent-color);
+    color: #8888aa;
+    font-size: 0.9rem;
+}
+
+.close-auth {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-auth:hover {
+    color: #00ffff;
+    text-shadow: 0 0 10px var(--glow-color);
+}
+
+.user-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.user-btn {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 8px 15px;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.3s ease;
+}
+
+.user-btn:hover {
+    background: rgba(0, 179, 179, 0.2);
+    box-shadow: 0 0 10px var(--glow-color);
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--main-bg-color);
+    border: 1px solid var(--accent-color);
+    min-width: 200px;
+    margin-top: 5px;
+    display: none;
+    box-shadow: 0 0 15px var(--glow-color);
+}
+
+.user-dropdown.show {
+    display: block;
+}
+
+.user-info {
+    padding: 15px;
+    border-bottom: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    padding: 10px 15px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background: rgba(0, 179, 179, 0.1);
+    color: var(--accent-color);
+}
+
+.auth-message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.auth-success {
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid #00ff00;
+    color: #00ff00;
+}
+
+.auth-error {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid #ff3333;
+    color: #ff3333;
+}
+
+.registration-required {
+    background: rgba(0, 179, 179, 0.1);
+    border: 2px dashed var(--accent-color);
+    padding: 30px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.registration-required h3 {
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.user-badge {
+    background: var(--accent-color);
+    color: var(--main-bg-color);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    margin-left: 5px;
+}
+/* Стили для личного кабинета и постов */
+.avatar-selection {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.avatar-option {
+    width: 80px;
+    height: 80px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.avatar-option img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-option.selected {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px var(--glow-color);
+}
+
+.background-selection {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.bg-option {
+    text-align: center;
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.bg-option.selected {
+    border-color: var(--accent-color);
+    background: rgba(0, 179, 179, 0.1);
+}
+
+.bg-preview {
+    width: 100%;
+    height: 60px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    border: 1px solid var(--accent-color);
+}
+
+.default-bg {
+    background: linear-gradient(135deg, #0a0a12 0%, #1a1a2e 100%);
+}
+
+.cyber-bg {
+    background: linear-gradient(135deg, #0a0a12 0%, #16213e 50%, #0f3460 100%);
+}
+
+.ocean-bg {
+    background: linear-gradient(135deg, #0a0a12 0%, #1a1a2e 50%, #2d545e 100%);
+}
+
+.bg-option span {
+    font-size: 0.8rem;
+    color: var(--text-color);
+}
+
+.post-creator {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--accent-color);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.post-creator h4 {
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.my-posts-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.my-posts-list h4 {
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    font-family: 'Orbitron', sans-serif;
+    border-bottom: 1px solid var(--accent-color);
+    padding-bottom: 10px;
+}
+
+.user-post {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--accent-color);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.post-content {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #8888aa;
+}
+
+.delete-post {
+    background: var(--classified-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    transition: all 0.3s ease;
+}
+
+.delete-post:hover {
+    background: #ff6666;
+}
+
+.no-posts {
+    text-align: center;
+    color: #8888aa;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Обновленные стили для комментариев с аватарами */
+.comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #8888aa;
+}
+
+.comment-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 8px;
+    border: 1px solid var(--accent-color);
+}
+
+.comment-user {
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.comment-date {
+    margin-left: auto;
+    font-size: 0.8rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .avatar-selection {
+        justify-content: center;
+    }
+    
+    .background-selection {
+        grid-template-columns: 1fr;
+    }
+    
+    .bg-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .bg-preview {
+        width: 60px;
+        height: 40px;
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .avatar-option {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .user-post {
+        padding: 10px;
+    }
+    
+    .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
+
+.header-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.header-links .neon-link {
+    margin: 5px;
+}
+
+@media (max-width: 768px) {
+    .header-links {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .header-links .neon-link {
+        margin: 5px 0;
+    }
+}
+
+/* Стили для header-links */
+.header-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.header-links .neon-link {
+    margin: 5px;
+}
+
+@media (max-width: 768px) {
+    .header-links {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .header-links .neon-link {
+        margin: 5px 0;
+    }
+}
+
+/* Стили для комментариев */
+.comment {
+    border-left: 2px solid var(--accent-color);
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #8888aa;
+}
+
+.comment-user {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.comment-text {
+    line-height: 1.4;
+}
+
+.comment-form {
+    margin: 20px 0;
+}
+
+.comment-form textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    resize: vertical;
+    min-height: 60px;
+}
+
+.comment-form button {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.3s ease;
+}
+
+.comment-form button:hover {
+    background: rgba(0, 179, 179, 0.1);
+    color: var(--accent-color);
+}
+
+/* Стили для ссылок на профиль в комментариях */
+.comment-user-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.comment-user-link:hover {
+    text-decoration: underline;
+    color: #00ffff;
+}
+/* Стили для ссылок на профиль в комментариях */
+.comment-user {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.comment-user.current-user {
+    color: #00ffff;
+    text-decoration: underline;
+}
+
+.comment-user-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.comment-user-link:hover {
+    text-decoration: underline;
+    color: #00ffff;
+}
+.avatar-upload {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.upload-btn {
+    background: #4a5568;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.upload-btn:hover {
+    background: #2d3748;
+}
+
+.comment-auth-required {
+    text-align: center;
+    padding: 20px;
+    background: #f7fafc;
+    border-radius: 8px;
+}
+
+.auth-link {
+    background: none;
+    border: none;
+    color: #3182ce;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.auth-link:hover {
+    color: #2c5aa0;
+}
+.avatar-upload {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.upload-btn {
+    background: #4a5568;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.upload-btn:hover {
+    background: #2d3748;
+}
+
+.avatar-selection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.avatar-option {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.avatar-option.selected {
+    border-color: var(--accent-color);
+    background: rgba(0, 179, 179, 0.1);
+}
+
+.avatar-option img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.background-selection {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.bg-option {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.bg-option.selected {
+    border-color: var(--accent-color);
+    background: rgba(0, 179, 179, 0.1);
+}
+
+.bg-preview {
+    width: 100%;
+    height: 40px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.default-bg {
+    background: linear-gradient(135deg, #0a0a12 0%, #1a1a2e 100%);
+}
+
+.cyber-bg {
+    background: linear-gradient(135deg, #0a0a12 0%, #16213e 50%, #0f3460 100%);
+}
+
+.ocean-bg {
+    background: linear-gradient(135deg, #0a0a12 0%, #1a1a2e 50%, #2d545e 100%);
+}
+.user-menu {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 10000 !important;
+}
+
+.user-btn {
+    background: rgba(0, 179, 179, 0.2) !important;
+    border: 1px solid var(--accent-color) !important;
+    color: var(--text-color) !important;
+    padding: 10px 20px !important;
+    cursor: pointer !important;
+    font-family: 'Share Tech Mono', monospace !important;
+    transition: all 0.3s ease !important;
+}
+
+.user-btn:hover {
+    background: rgba(0, 179, 179, 0.4) !important;
+    color: var(--accent-color) !important;
+}

@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Подробная информация о субъектах</title>
+
+    <style>
+
+        :root {
+
+            --main-bg-color: #0a0a12;
+
+            --text-color: #c2c2d6;
+
+            --accent-color: #00b3b3;
+
+            --glow-color: rgba(0, 179, 179, 0.5);
+
+            --classified-color: #ff3333;
+
+        }
+
+
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+
+        body {
+
+            background-color: var(--main-bg-color);
+
+            color: var(--text-color);
+
+            font-family: 'Share Tech Mono', monospace;
+
+            line-height: 1.6;
+
+            padding: 20px;
+
+            background-image: 
+
+                radial-gradient(circle at 10% 20%, rgba(0, 179, 179, 0.05) 0%, transparent 20%),
+
+                radial-gradient(circle at 90% 80%, rgba(0, 179, 179, 0.05) 0%, transparent 20%),
+
+                linear-gradient(rgba(10, 10, 18, 0.99), rgba(10, 10, 18, 0.99)),
+
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2300b3b3' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+
+            overflow-x: hidden;
+
+        }
+
+
+
+        .container {
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            padding: 20px;
+
+            border: 1px solid var(--accent-color);
+
+            box-shadow: 0 0 15px var(--glow-color);
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+
+        .container::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            right: 0;
+
+            height: 1px;
+
+            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+
+            animation: scanline 8s linear infinite;
+
+        }
+
+
+
+        @keyframes scanline {
+
+            0% { top: 0; }
+
+            100% { top: 100%; }
+
+        }
+
+
+
+        header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+            padding-bottom: 20px;
+
+            border-bottom: 1px solid var(--accent-color);
+
+            position: relative;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+        }
+
+.header-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+@media (max-width: 768px) {
+    .header-links {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+
+        .header-content {
+
+            width: 100%;
+
+            max-width: 800px;
+
+        }
+
+
+
+        h1 {
+
+            font-family: 'Orbitron', sans-serif;
+
+            font-size: 2.5rem;
+
+            color: var(--accent-color);
+
+            text-transform: uppercase;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 10px;
+
+            text-shadow: 0 0 10px var(--glow-color);
+
+        }
+
+
+
+        h2 {
+
+            font-family: 'Orbitron', sans-serif;
+
+            color: var(--accent-color);
+
+            margin: 25px 0 15px;
+
+            border-left: 3px solid var(--accent-color);
+
+            padding-left: 10px;
+
+            text-shadow: 0 0 5px var(--glow-color);
+
+        }
+
+
+
+        h3 {
+
+            font-family: 'Orbitron', sans-serif;
+
+            color: var(--accent-color);
+
+            margin: 20px 0 10px;
+
+        }
+
+
+
+        p {
+
+            margin-bottom: 15px;
+
+            text-align: justify;
+
+        }
+
+
+
+        .timestamp {
+
+            font-size: 0.9rem;
+
+            color: #8888aa;
+
+            text-align: right;
+
+            margin-top: -15px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+
+        a.neon-link {
+
+            color: #00b3b3;
+
+            text-decoration: none;
+
+            text-shadow: 0 0 5px #00b3b3;
+
+            transition: all 0.3s ease;
+
+            padding: 8px 16px;
+
+            border: 1px solid rgba(0, 179, 179, 0.3);
+
+            border-radius: 4px;
+
+            display: inline-block;
+
+            margin: 15px 0;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+
+        a.neon-link::before {
+
+            content: '';
+
+            position: absolute;
+
+            top: 0;
+
+            left: -100%;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+
+            transition: left 0.7s ease;
+
+        }
+
+
+
+        a.neon-link:hover::before {
+
+            left: 100%;
+
+        }
+
+
+
+        a.neon-link:hover {
+
+            color: #00ffff;
+
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+
+            background: rgba(0, 179, 179, 0.1);
+
+            box-shadow: 0 0 15px rgba(0, 179, 179, 0.4);
+
+            border-color: #00ffff;
+
+        }
+
+
+
+        /* Стили для страницы персонажей */
+
+        .character-grid {
+
+            display: grid;
+
+            grid-template-columns: 300px 1fr;
+
+            gap: 30px;
+
+            margin: 40px 0;
+
+            opacity: 0;
+
+            transform: translateY(20px);
+
+            transition: opacity 1s ease, transform 1s ease;
+
+        }
+
+
+
+        .character-grid.visible {
+
+            opacity: 1;
+
+            transform: translateY(0);
+
+        }
+
+
+
+        .character-media {
+
+            position: relative;
+
+            border: 1px solid var(--accent-color);
+
+            box-shadow: 0 0 15px var(--glow-color);
+
+            overflow: hidden;
+
+            height: 300px;
+
+            background: #000;
+
+        }
+
+
+
+        .character-media video {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            opacity: 0;
+
+            transition: opacity 1.5s ease;
+
+        }
+
+
+
+        .character-media .placeholder {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #0a0a1a;
+
+            color: var(--accent-color);
+
+            font-family: 'Orbitron', sans-serif;
+
+            text-align: center;
+
+            padding: 20px;
+
+            transition: opacity 1s ease;
+
+        }
+
+
+
+        .character-info {
+
+            padding: 20px;
+
+            border: 1px solid var(--accent-color);
+
+            background: rgba(0, 0, 0, 0.2);
+
+            position: relative;
+
+        }
+
+
+
+        .character-name {
+
+            font-family: 'Orbitron', sans-serif;
+
+            color: var(--accent-color);
+
+            margin-bottom: 20px;
+
+            padding-bottom: 10px;
+
+            border-bottom: 1px solid var(--accent-color);
+
+            font-size: 1.5rem;
+
+        }
+
+
+
+        .character-description {
+
+            margin-bottom: 20px;
+
+            line-height: 1.7;
+
+        }
+
+
+
+        .character-details {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 20px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+
+        .detail-section {
+
+            padding: 15px;
+
+            border-left: 2px solid var(--accent-color);
+
+            background: rgba(0, 179, 179, 0.05);
+
+        }
+
+
+
+        .detail-section h4 {
+
+            color: var(--accent-color);
+
+            margin-bottom: 10px;
+
+            font-family: 'Orbitron', sans-serif;
+
+        }
+
+
+
+        .character-traits {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+
+        .trait {
+
+            padding: 10px;
+
+            border-left: 2px solid var(--accent-color);
+
+            background: rgba(0, 179, 179, 0.05);
+
+        }
+
+
+
+        .trait strong {
+
+            color: var(--accent-color);
+
+            display: block;
+
+            margin-bottom: 5px;
+
+        }
+
+
+
+        .classified {
+
+            background-color: rgba(255, 51, 51, 0.1);
+
+            border: 1px solid var(--classified-color);
+
+            padding: 15px;
+
+            margin: 20px 0;
+
+            position: relative;
+
+        }
+
+
+
+        .classified::before {
+
+            content: "ЗАСЕКРЕЧЕНО";
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 50%;
+
+            transform: translate(-50%, -50%) rotate(-45deg);
+
+            font-size: 2.5rem;
+
+            font-weight: bold;
+
+            color: rgba(255, 51, 51, 0.2);
+
+            letter-spacing: 2px;
+
+            z-index: 1;
+
+            pointer-events: none;
+
+        }
+
+
+
+        .redacted-text {
+
+            background-color: #000;
+
+            color: #000;
+
+            padding: 0 2px;
+
+            margin: 0 1px;
+
+            user-select: none;
+
+            display: inline-block;
+
+            height: 1.2em;
+
+            vertical-align: middle;
+
+        }
+
+
+
+        .redacted-line {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            line-height: 1.5;
+
+        }
+
+
+
+        .pagination {
+
+            display: flex;
+
+            justify-content: center;
+
+            margin: 40px 0 20px;
+
+            gap: 10px;
+
+        }
+
+
+
+        .page-btn {
+
+            background: rgba(0, 0, 0, 0.3);
+
+            border: 1px solid var(--accent-color);
+
+            color: var(--text-color);
+
+            padding: 10px 20px;
+
+            cursor: pointer;
+
+            font-family: 'Share Tech Mono', monospace;
+
+            transition: all 0.3s ease;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+
+        .page-btn::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: -100%;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: linear-gradient(90deg, transparent, rgba(0, 179, 179, 0.2), transparent);
+
+            transition: 0.5s;
+
+        }
+
+
+
+        .page-btn:hover::before {
+
+            left: 100%;
+
+        }
+
+
+
+        .page-btn.active {
+
+            background: var(--accent-color);
+
+            color: var(--main-bg-color);
+
+            box-shadow: 0 0 10px var(--glow-color);
+
+        }
+
+
+
+        .page-btn:hover:not(.active) {
+
+            background: rgba(0, 179, 179, 0.2);
+
+        }
+
+
+
+        .typing-audio {
+
+            display: none;
+
+        }
+
+
+
+        footer {
+
+            text-align: center;
+
+            margin-top: 40px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid var(--accent-color);
+
+            font-size: 0.9rem;
+
+            color: #8888aa;
+
+        }
+
+
+
+        .visitor-counter {
+
+            position: fixed;
+
+            bottom: 10px;
+
+            right: 10px;
+
+            background: rgba(0, 0, 0, 0.7);
+
+            padding: 5px 10px;
+
+            border: 1px solid var(--accent-color);
+
+            font-size: 0.8rem;
+
+            z-index: 1000;
+
+        }
+
+
+
+        @media (max-width: 968px) {
+
+            .character-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            
+
+            .character-media {
+
+                height: 250px;
+
+            }
+
+            
+
+            .character-details, .character-traits {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+
+        @media (max-width: 480px) {
+
+            h1 {
+
+                font-size: 1.8rem;
+
+            }
+
+            
+
+            .character-name {
+
+                font-size: 1.3rem;
+
+            }
+
+            
+
+            .pagination {
+
+                flex-wrap: wrap;
+
+            }
+
+            
+
+            .page-btn {
+
+                padding: 8px 12px;
+
+                font-size: 0.9rem;
+
+            }
+
+        }
+
+
+
+        /* Анимации */
+
+        @keyframes flicker {
+
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+
+                opacity: 1;
+
+            }
+
+            20%, 24%, 55% {
+
+                opacity: 0.6;
+
+            }
+
+        }
+
+
+
+        @keyframes glitch-anim-1 {
+
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+
+            5% { clip: rect(12px, 9999px, 59px, 0); }
+
+            10% { clip: rect(48px, 9999px, 29px, 0); }
+
+            15% { clip: rect(42px, 9999px, 73px, 0); }
+
+            20% { clip: rect(63px, 9999px, 27px, 0); }
+
+            25% { clip: rect(34px, 9999px, 55px, 0); }
+
+            30% { clip: rect(86px, 9999px, 73px, 0); }
+
+            35% { clip: rect(20px, 9999px, 20px, 0); }
+
+            40% { clip: rect(26px, 9999px, 60px, 0); }
+
+            45% { clip: rect(25px, 9999px, 66px, 0); }
+
+            50% { clip: rect(57px, 9999px, 98px, 0); }
+
+            55% { clip: rect(5px, 9999px, 46px, 0); }
+
+            60% { clip: rect(82px, 9999px, 31px, 0); }
+
+            65% { clip: rect(54px, 9999px, 27px, 0); }
+
+                   70% { clip: rect(28px, 9999px, 99px, 0); }
+
+        75% { clip: rect(45px, 9999px, 69px, 0); }
+
+        80% { clip: rect(23px, 9999px, 85px, 0); }
+
+        85% { clip: rect(54px, 9999px, 84px, 0); }
+
+        90% { clip: rect(45px, 9999px, 47px, 0); }
+
+        95% { clip: rect(24px, 9999px, 23px, 0); }
+
+        100% { clip: rect(32px, 9999px, 92px, 0); }
+
+    }
+
+
+
+    @keyframes glitch-anim-2 {
+
+        0% { clip: rect(65px, 9999px, 100px, 0); }
+
+        5% { clip: rect(52px, 9999px, 74px, 0); }
+
+        10% { clip: rect(79px, 9999px, 85px, 0); }
+
+        15% { clip: rect(75px, 9999px, 5px, 0); }
+
+        20% { clip: rect(67px, 9999px, 61px, 0); }
+
+        25% { clip: rect(14px, 9999px, 79px, 0); }
+
+        30% { clip: rect(1px, 9999px, 66px, 0); }
+
+        35% { clip: rect(86px, 9999px, 30px, 0); }
+
+        40% { clip: rect(23px, 9999px, 98px, 0); }
+
+        45% { clip: rect(85px, 9999px, 72px, 0); }
+
+        50% { clip: rect(71px, 9999px, 75px, 0); }
+
+        55% { clip: rect(2px, 9999px, 48px, 0); }
+
+        60% { clip: rect(30px, 9999px, 16px, 0); }
+
+        65% { clip: rect(59px, 9999px, 50px, 0); }
+
+        70% { clip: rect(41px, 9999px, 62px, 0); }
+
+        75% { clip: rect(2px, 9999px, 82px, 0); }
+
+        80% { clip: rect(47px, 9999px, 73px, 0); }
+
+        85% { clip: rect(3px, 9999px, 27px, 0); }
+
+        90% { clip: rect(26px, 9999px, 55px, 0); }
+
+        95% { clip: rect(42px, 9999px, 97px, 0); }
+
+        100% { clip: rect(38px, 9999px, 49px, 0); }
+
+    }
+
+
+
+    @keyframes pulse {
+
+        0% { opacity: 0.7; }
+
+        50% { opacity: 0.3; }
+
+        100% { opacity: 0.7; }
+
+    }
+
+
+
+    .glitch {
+
+        position: relative;
+
+        animation: flicker 10s infinite;
+
+    }
+
+
+
+    .glitch::before, .glitch::after {
+
+        content: attr(data-text);
+
+        position: absolute;
+
+        top: 0;
+
+        left: 0;
+
+        width: 100%;
+
+        height: 100%;
+
+        clip: rect(0, 0, 0, 0);
+
+    }
+
+
+
+    .glitch::before {
+
+        left: 2px;
+
+        text-shadow: -2px 0 #ff00ff;
+
+        animation: glitch-anim-1 2s infinite linear alternate-reverse;
+
+    }
+
+
+
+    .glitch::after {
+
+        left: -2px;
+
+        text-shadow: 2px 0 #00ffff;
+
+        animation: glitch-anim-2 3s infinite linear alternate-reverse;
+
+    }
+
+
+
+    .pulse {
+
+        animation: pulse 2s infinite;
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+       <header>
+    <div class="header-content">
+        <h1 class="glitch" data-text="S-5 ФОНд АРХИВ: ПЕРСОНАЛ">S-5 ФОНД АРХИВ: ПЕРСОНАЛ</h1>
+        <div class="header-links">
+            <a href="front.html" class="neon-link">Засекреченные материалы</a>
+            <a href="news.html" class="neon-link">Обновления камеры "содержания"</a>
+            <a href="profile.html" class="neon-link">Личное дело</a>
+        </div>
+        <p>Дата последнего обновления: <span class="timestamp">[ДАННЫЕ УДАЛЕНЫ]</span></p>
+    </div>
+</header>
+
+
+
+        <div class="pagination">
+
+            
+
+            <button class="page-btn active" onclick="changePage(2)">Персоналы</button>
+
+            
+        </div>
+
+
+
+        <main>
+
+            <h2>КЛАССИФИЦИРОВАННАЯ ИНФОРМАЦИЯ О ПЕРСОНАЛЕ</h2>
+
+            <p>Следующие данные содержат информацию о ключевых сотрудниках Фонда. Доступ ограничен персоналом уровня 4 и выше.</p>
+
+            
+
+            <!-- Спектр -->
+
+            <div class="character-grid" id="character-1">
+
+                <div class="character-media">
+
+                    <video muted loop>
+
+                        <source src="video1.mp4" type="video/mp4">
+
+                        Ваш браузер не поддерживает видео.
+
+                    </video>
+
+                    <div class="placeholder">ВИДЕО-МАТЕРИАЛ #SPECTR-7<br>ДОСТУП РАЗРЕШЕН</div>
+
+                </div>
+
+                <div class="character-info">
+
+                    <h3 class="character-name">Спектр</h3>
+
+                    <div class="character-description">
+
+                        <p>Агент под прикрытием, специализирующийся на инфильтрации враждебных организаций. Спектр присоединился к Фонду после инцидента с ████████ в ████████.</p>
+
+                        <p>Специализируется на сборе разведданных и нейтрализации угроз изнутри. Провел ██ успешных операций под прикрытием.</p>
+
+                    </div>
+
+                    
+
+                    <div class="character-details">
+
+                        <div class="detail-section">
+
+                            <h4>БИОГРАФИЯ</h4>
+
+                            <p>Родился: 15.08.1985 в ███████, Россия</p>
+
+                            <p>Присоединился к Фонду: 12.06.2010</p>
+
+                            <p>Происхождение: Бывшая ████████████ ГРУ</p>
+
+                        </div>
+
+                        
+
+                        <div class="detail-section">
+
+                            <h4>МЕДИЦИНСКАЯ ИНФОРМАЦИЯ</h4>
+
+                            <p>Группа крови: A+</p>
+
+                            <p>Аномальные воздействия: Неусточива к сухим помещениям, требует увлажнения. Нестабильна, нужно вводить каждый день внутривенно препарат ██████ Слабая психика. Возможны новые мутации</p>
+
+                            <p>Состояние: Нестабильное</p>
+
+                        </div>
+
+                        
+
+                        <div class="detail-section">
+
+                            <h4>МЕСТА СЛУЖБЫ</h4>
+
+                            <p>Объект-19 (2010-2015)</p>
+
+                            <p>Объект-76 (2015-2019)</p>
+
+                            <p>Мобильная оперативная группа "Эпсилон-11" (2019-н.в.)</p>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <div class="character-traits">
+
+                        <div class="trait">
+
+                            <strong>Характер</strong>
+
+                            <span>Скрытный, проницательный, нестабильный</span>
+
+                        </div>
+
+                        <div class="trait">
+
+                            <strong>Предпочтения</strong>
+
+                            <span>Минимализм, технологичные гаджеты</span>
+
+                        </div>
+
+                        <div class="trait">
+
+                            <strong>Особые навыки</strong>
+
+                            <span>В поисковых группах предназначеных для нахождения █████████ имеет особую важность</span>
+
+                        </div>
+
+                        <div class="trait">
+
+                            <strong>Статус</strong>
+
+                            <span>Активен, уровень доступа 4</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+            <!-- Агент Стал-10 -->
+
+            <div class="character-grid" id="character-2">
+
+                <div class="character-media">
+
+                    <video muted loop>
+
+                        <source src="video2.mp4" type="video/mp4">
+
+                        Ваш браузер не поддерживает видео.
+
+                    </video>
+
+                    <div class="placeholder">ВИДЕО-МАТЕРИАЛ #AGENT-STAL-10<br>ДОСТУП ОГРАНИЧЕН</div>
+
+                </div>
+
+                <div class="character-info">
+
+                    <h3 class="character-name">Агент Стал-10</h3>
+
+                    
+
+                    <div class="classified">
+
+                        <div class="redacted-line">
+
+                            <span class="redacted-text" style="width: 120px;"></span>
+
+                        </div>
+
+                        <div class="redacted-line">
+
+                            <span class="redacted-text" style="width: 85px;"></span>
+
+                            <span class="redacted-text" style="width: 40px;"></span>
+
+                        </div>
+
+                        <div class="redacted-line">
+
+                            <span class="redacted-text" style="width: 60px;"></span>
+
+                            <span class="redacted-text" style="width: 70px;"></span>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <div class="character-description">
+
+                        <p>Агент мобильной оперативной группы "Сигма-9". Специализируется на задержании и сдерживании враждебных объектов. Участвовал в ██ успешных операциях по нейтрализации.</p>
+
+                        <p>Прошел подготовку в ██████████, обладает улучшенными рефлексами и устойчивостью к ментальным воздействиям.</p>
+
+                    </div>
+
+                    
+
+                    <div class="character-details">
+
+                        <div class="detail-section">
+
+                            <h4>БИОГРАФИЯ</h4>
+
+                            <div class="classified">
+
+                                <div class="redacted-line">
+
+                                    <span class="redacted-text" style="width: 90px;"></span>
+
+                                    <span class="redacted-text" style="width: 40px;"></span>
+
+                                </div>
+
+                                <div class="redacted-line">
+
+                                    <span class="redacted-text" style="width: 110px;"></span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        
+
+                        <div class="detail-section">
+
+                            <h4>МЕДИЦИНСКАЯ ИНФОРМАЦИЯ</h4>
+
+                            <div class="classified">
+
+                                <div class="redacted-line">
+
+                                    <span class="redacted-text" style="width: 70px;"></span>
+
+                                </div>
+
+                                <div class="redacted-line">
+
+                                    <span class="redacted-text" style="width: 85px;"></span>
+
+                                    <span class="redacted-text" style="width: 30px;"></span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        
+
+                        <div class="detail-section">
+
+                            <h4>МЕСТА СЛУЖБЫ</h4>
+
+                            <div class="classified">
+
+                                <div class="redacted-line">
+
+                                    <span class="redacted-text" style="width: 95px;"></span>
+
+                                </div>
+
+                                <div class="redacted-line">
+
+                                    <span class="redacted-text" style="width: 65px;"></span>
+
+                                    <span class="redacted-text" style="width: 45px;"></span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <div class="character-traits">
+
+                        <div class="trait">
+
+                            <strong>Характер</strong>
+
+                            <span>Дисциплинированный, решительный, немногоциничный</span>
+
+                        </div>
+
+                        <div class="trait">
+
+                            <strong>Предпочтения</strong>
+
+                            <span>Протеиновые батончики, практичное обмундирование</span>
+
+                        </div>
+
+                        <div class="trait">
+
+                            <strong>Особые навыки</strong>
+
+                            <span>Боевые искусства, тактическое планирование, выживание</span>
+
+                        </div>
+
+                        <div class="trait">
+
+                            <strong>Статус</strong>
+
+                            <span>Активен, уровень доступа 3</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+            <!-- Доктор Мэнд-23 -->
+
+            <div class="character-grid" id="character-3">
+
+                <div class="character-media">
+
+                    <video muted loop>
+
+                        <source src="video4.mp4" type="video/mp4">
+
+                        Ваш браузер не поддерживает видео.
+
+                    </video>
+
+                    <div class="placeholder">ВИДЕО-МАТЕРИАЛ #DR-MANDR-23<br>ДОСТУП ОГРАНИЧЕН</div>
+
+                </div>
+
+                <div class="character-info">
+
+                    <h3 class="character-name">Доктор Мэнд-23</h3>
+
+                    
+
+                    <div class="classified">
+
+                        <div class="redacted-line">
+
+                            <span class="redacted-text" style="width: 95px;"></span>
+
+                            <span class="redacted-text" style="width: 30px;"></span>
+
+                        </div>
+
+                        <div class="redacted-line">
+
+                            <span class="redacted-text" style="width: 110px;"></span>
+
+                        </div>
+
+                        <div class="redacted-line">
+
+                            <span class="redacted-text" style="width: 75px;"></span>
+
+                            <span class="redacted-text" style="width: 45px;"></span>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <div class="character-description">
+
+                        <p>Ведущий специалист по ксенобиологии и инопланетным артефактам. Доктор Мэнд-23 присоединился к Фонду после инцидента с ████████ в 2011 году.</p>
+
+                        <p>Отвечает за изучение и каталогизацию внеземных SCP-объектов. Разработал ██ протоколов сдерживания для объектов внеземного происхождения.</p>
+
+                    </div>
+
+                    
+
+                    <div class="character-details">
+
+                        <div class="detail-section">
+
+                            <h4>БИОГРАФИЯ</h4>
+
+                            <div class="classified">
+
+                                <div class="redacted-line">
+
+                                    <span class="redacted-text" style="width: 80px;"></span>
+
+                                    <span class="redacted-text" style="width: 50px;"></span>
+
+                                </div>
+
+                                <div class="redacted-line">
+
+                                    <span class="redacted-text" style="width: 100px;"></span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        
+
+                        <div class="detail-section">
+
+                            <h4>МЕДИЦИНСКАЯ ИНФОРМАЦИЯ</h4>
+
+                            <div class="classified">
+
+                                <div class="redacted-line">
+
+                                    <span class="redacted-text" style="width: 75px;"></span>
+
+                                </div>
+
+                                <div class="redacted-line">
+
+                                    <span class="redacted-text" style="width: 90px;"></span>
+
+                                    <span class="redacted-text" style="width: 25px;"></span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        
+
+                        <div class="detail-section">
+
+                            <h4>МЕСТА СЛУЖБЫ</h4>
+
+                            <div class="classified">
+
+                                <div class="redacted-line">
+
+                                    <span class="redacted-text" style="width: 85px;"></span>
+
+                                </div>
+
+                                <div class="redacted-line">
+
+                                    <span class="redacted-text" style="width: 70px;"></span>
+
+                                    <span class="redacted-text" style="width: 40px;"></span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <div class="character-traits">
+
+                        <div class="trait">
+
+                            <strong>Характер</strong>
+
+                            <span>Любознательный, новаторский, немногорассеянный</span>
+
+                        </div>
+
+                        <div class="trait">
+
+                            <strong>Предпочтения</strong>
+
+                            <span>Зеленый чай, научная фантастика, головоломки</span>
+
+                        </div>
+
+                        <div class="trait">
+
+                            <strong>Особые навыки</strong>
+
+                            <span>Ксенобиология, астрофизика, лингвистический анализ</span>
+
+                        </div>
+
+                        <div class="trait">
+
+                            <strong>Статус</strong>
+
+                            <span>Активен, уровень доступа 4</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+            <!-- Гуманоид Осьминог -->
+
+            <div class="character-grid" id="character-4">
+
+                <div class="character-media">
+
+                    <video muted loop>
+
+                        <source src="video3.mp4" type="video/mp4">
+
+                        Ваш браузер не поддерживает видео.
+
+                    </video>
+
+                    <div class="placeholder">ВИДЕО-МАТЕРИАЛ #OCTO-HUM-5<br>ДОСТУП РАЗРЕШЕН</div>
+
+                </div>
+
+                <div class="character-info">
+
+                    <h3 class="character-name">Свиф-5</h3>
+
+                    <div class="character-description">
+
+                        <p>Аномальное существо с высоким интеллектом, сотрудничающее с Фондом. Было обнаружено в 2015 году в Тихом океане после инцидента с ████████.</p>
+
+                        <p>Обладает способностью к быстрому обучению и адаптации. Специализируется на подводных операциях и анализе морских аномалий.</p>
+
+                    </div>
+
+                    
+
+                    <div class="character-details">
+
+                        <div class="detail-section">
+
+                            <h4>БИОГРАФИЯ</h4>
+
+                            <p>Обнаружен: 03.11.2015 в Марианской впадине</p>
+
+                            <p>Присоединился к Фонду: 15.06.2016</p>
+
+                            <p>Происхождение: Неизвестно (внеземное/подводное)</p>
+
+                        </div>
+
+                        
+
+                        <div class="detail-section">
+
+                            <h4>МЕДИЦИНСКАЯ ИНФОРМАЦИЯ</h4>
+
+                            <p>Физиология: Гибрид головоногого и гуманоида</p>
+
+                            <p>Аномальные способности: Регенерация, адаптация к давлению</p>
+
+                            <p>Состояние: Стабильное, требует соленой воды</p>
+
+                        </div>
+
+                        
+
+                        <div class="detail-section">
+
+                            <h4>МЕСТА СЛУЖБЫ</h4>
+
+                            <p>Подводный объект-32 (2016-2018)</p>
+
+                            <p>Исследовательская станция "Тритон" (2018-2021)</p>
+
+                            <p>Объект-17 (2021-н.в.)</p>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <div class="character-traits">
+
+                        <div class="trait">
+
+                            <strong>Характер</strong>
+
+                            <span>Любопытный, методичный, слегка отстраненный</span>
+
+                        </div>
+
+                        <div class="trait">
+
+                            <strong>Предпочтения</strong>
+
+                            <span>Соленая вода, сложные головоломки, кальмары</span>
+
+                        </div>
+
+                        <div class="trait">
+
+                            <strong>Особые навыки</strong>
+
+                            <span>Гидродинамика, многозадачность, решение сложных проблем</span>
+
+                        </div>
+
+                        <div class="trait">
+
+                            <strong>Статус</strong>
+
+                            <span>Активен, уровень доступа 3</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+<div class="character-grid" id="character-5">
+                <div class="character-media">
+                    <video muted loop>
+                        <source src="video5.mp4" type="video/mp4">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                    <div class="placeholder">ВИДЕО-МАТЕРИАЛ #JORUNNA-P-1<br>ДОСТУП ОГРАНИЧЕН</div>
+                </div>
+                <div class="character-info">
+                    <h3 class="character-name">Jorunna parva "Русак"</h3>
+                    
+                    <div class="character-description">
+                        <p>Аномальный гуманоид, обнаруженный в ходе экспедиции ███████ в ███████ море. Проявил лояльность к Фонду после инцидента ██-████.</p>
+                        <p>Специализируется на подводных операциях и анализе морских аномалий. Прошел ██ успешных миссий в водной среде.</p>
+                    </div>
+                    
+                    <div class="character-details">
+                        <div class="detail-section">
+                            <h4>БИОГРАФИЯ</h4>
+                            <div class="classified">
+                                <div class="redacted-line">
+                                    <span class="redacted-text" style="width: 120px;"></span>
+                                </div>
+                                <div class="redacted-line">
+                                    <span class="redacted-text" style="width: 90px;"></span>
+                                    <span class="redacted-text" style="width: 45px;"></span>
+                                </div>
+                            </div>
+                            <p>Обнаружен: [ДАННЫЕ УДАЛЕНЫ]</p>
+                            <p>Присоединился к Фонду: [ДАННЫЕ УДАЛЕНЫ]</p>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>МЕДИЦИНСКАЯ ИНФОРМАЦИЯ</h4>
+                            <p>Телосложение: Худощавое, вытянутое. Непропорционально длинные конечности.</p>
+                            <p>Кровь: Голубоватый цвет. Содержит гемоцианин.</p>
+                            <p>Процедуры: Брать анализ тканей каждые ██ месяцев.</p>
+                            <p>Условия содержания: Держать в закрытом помещении при температуре от +3 до +10 градусов. Увлажнять воздух раствором из ███████.</p>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>МЕСТА СЛУЖБЫ</h4>
+                            <div class="classified">
+                                <div class="redacted-line">
+                                    <span class="redacted-text" style="width: 105px;"></span>
+                                </div>
+                                <div class="redacted-line">
+                                    <span class="redacted-text" style="width: 80px;"></span>
+                                    <span class="redacted-text" style="width: 35px;"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="character-traits">
+                        <div class="trait">
+                            <strong>Внешний вид</strong>
+                            <span>Гуманоид с чертами "морского кролика", биолюминесцентные узоры на коже</span>
+                        </div>
+                        <div class="trait">
+                            <strong>Ограничения</strong>
+                            <span>Не назначать на миссии с длительным нахождением на суше</span>
+                        </div>
+                        <div class="trait">
+                            <strong>Особые навыки</strong>
+                            <span>Усиленное восприятие в воде, ███████████████████</span>
+                        </div>
+                        <div class="trait">
+                            <strong>Вооружение</strong>
+                            <span>Предоставить оружие ближнего боя класса ███-█</span>
+                        </div>
+                    </div>
+
+                    <div class="classified">
+                        <div class="redacted-line">
+                            <span class="redacted-text" style="width: 140px;"></span>
+                        </div>
+                        <div class="redacted-line">
+                            <span class="redacted-text" style="width: 110px;"></span>
+                            <span class="redacted-text" style="width: 60px;"></span>
+                        </div>
+                        <div class="redacted-line">
+                            <span class="redacted-text" style="width: 95px;"></span>
+                            <span class="redacted-text" style="width: 50px;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+
+
+        <footer>
+
+            <p>ВСЕ ПРАВА ЗАЩИЩЕНЫ. НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП БУДЕТ ПРЕСЛЕДОВАТЬСЯ ПО ЗАКОНУ.</p>
+
+            <p>Версия системы: 7.4.2-Ω</p>
+
+        </footer>
+
+    </div>
+
+
+
+    <audio id="typeSound" class="typing-audio" preload="auto">
+
+        <source src="keys.mp3" type="audio/mpeg">
+
+    </audio>
+
+
+
+    <div class="visitor-counter">Посетителей сегодня: <span id="visit-count">0</span></div>
+
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("Скрипт script2.js успешно загружен!");
+
+        // Инициализация счетчика посещений
+        let visitCount = localStorage.getItem('visitCount') || 0;
+        visitCount = parseInt(visitCount) + 1;
+        localStorage.setItem('visitCount', visitCount);
+        document.getElementById('visit-count').textContent = visitCount;
+        
+        // Функция для воспроизведения звука
+        function playTypeSound() {
+            try {
+                const typeSound = document.getElementById('typeSound');
+                if (typeSound && typeof typeSound.play === 'function') {
+                    typeSound.currentTime = 0;
+                    typeSound.volume = 0.3;
+                    typeSound.play().catch(e => {
+                        console.log("Автовоспроизведение звука заблокировано");
+                    });
+                }
+            } catch (error) {
+                console.log("Audio error:", error);
+            }
+        }
+        
+        // Функция для отображения текста с эффектом печатания
+        function revealText(element, text, index = 0, delay = 0) {
+            if (index === 0) {
+                element.textContent = '';
+            }
+            
+            if (index < text.length) {
+                // Задержка перед началом печати
+                if (index === 0 && delay > 0) {
+                    setTimeout(() => {
+                        revealText(element, text, index);
+                    }, delay);
+                    return;
+                }
+                
+                // Воспроизводим звук нажатия клавиши (только для букв и цифр)
+                if (text[index].match(/[a-zA-Zа-яА-Я0-9]/)) {
+                    playTypeSound();
+                }
+                
+                // Добавляем символ
+                element.textContent += text[index];
+                
+                // Следующий символ с задержкой
+                setTimeout(() => {
+                    revealText(element, text, index + 1);
+                }, 50 + Math.random() * 30);
+            }
+        }
+        
+        // Функция для отображения видео
+        function revealVideo(mediaElement, delay) {
+            setTimeout(() => {
+                const placeholder = mediaElement.querySelector('.placeholder');
+                const video = mediaElement.querySelector('video');
+                
+                if (placeholder && video) {
+                    placeholder.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        placeholder.style.display = 'none';
+                        video.style.opacity = '1';
+                        
+                        // Попытка воспроизведения видео
+                        video.play().catch(e => {
+                            console.log("Автовоспроизведение видео заблокировано:", e);
+                        });
+                    }, 1000);
+                }
+            }, delay);
+        }
+        
+        // Функция для показа элемента с анимацией
+        function showElement(element, delay) {
+            setTimeout(() => {
+                element.classList.add('visible');
+            }, delay);
+        }
+        
+        // При загрузке страницы - плавное появление контента
+        setTimeout(() => {
+            // Показываем элементы с задержкой
+            const characterElements = document.querySelectorAll('.character-grid');
+            characterElements.forEach((element, index) => {
+                showElement(element, index * 600);
+                
+                // Для каждого элемента находим текстовые блоки и анимируем их
+                const textElements = element.querySelectorAll('.character-description p, .trait span, .detail-section p');
+                textElements.forEach((textEl, textIndex) => {
+                    const originalText = textEl.textContent;
+                    revealText(textEl, originalText, 0, index * 600 + textIndex * 300);
+                });
+                
+                // Анимируем медиа-элементы
+                const mediaElement = element.querySelector('.character-media');
+                if (mediaElement) {
+                    revealVideo(mediaElement, index * 600);
+                }
+            });
+        }, 1000);
+        
+        // Функция для смены страницы
+        window.changePage = function(pageNum) {
+            // Обновляем активную кнопку
+            document.querySelectorAll('.page-btn').forEach((btn, index) => {
+                if (index + 1 === pageNum) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // В реальном приложении здесь будет загрузка контента для выбранной страницы
+            console.log(`Переход на страницу ${pageNum}`);
+        };
+    });
+</script>
+
+</body>
+
+</html>
